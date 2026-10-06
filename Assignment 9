@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+data ={
+    'study_hours': [2, 3, 5, 7, 8, 10, 12, 15, 18, 20],
+    'Exam_scores': [60, 65, 70, 75, 80, 85, 90, 95, 98, 100]
+}
+df = pd.DataFrame(data)
+x = df['study_hours']
+
+Mean = np.mean(x)
+Median = np.median(x)
+
+variance = np.var(x, ddof=1)  # Sample variance
+std_val= np.std(x, ddof=1)  # Sample standard deviation
+
+print("Mean:", Mean)
+print("Median:", Median)
+print("Variance:", variance)
+print("Standard Deviation:", std_val)
+
+pearson_corr, p_value = stats.pearsonr(df['study_hours'], df['Exam_scores'])
+
+print (f"Pearson Correlation Coefficient: {pearson_corr:.4f}")
+print (f"P-value: {p_value:.4f}")
+
+print("--- Pandas Summary Statistics ---")
+print(df.describe())
+
+print("\n---Correlation Matrix ---")
+print(df.corr())

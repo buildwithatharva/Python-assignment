@@ -1,0 +1,27 @@
+import pandas as pd
+# Load dataset
+df = pd.read_csv(r"C:\Users\Asus\Downloads\StudentsPerformance.csv")
+print("Original Dataset:")
+print(df.head())
+# 1. Grouping by gender and calculating average scores
+print("\nAverage scores by gender:")
+grouped_gender = df.groupby("gender")[["math score", "reading score", "writing score"]].mean()
+print(grouped_gender)
+# 2. Grouping by parental level of education
+print("\nAverage scores based on parental education:")
+grouped_parent = df.groupby("parental level of education")[
+    ["math score", "reading score", "writing score"]
+].mean()
+print(grouped_parent)
+# 3. Multiple aggregation operations
+print("\nStatistical summary of Math scores by gender:")
+aggregation = df.groupby("gender")["math score"].agg(
+    ["mean", "min", "max", "count"]
+)
+print(aggregation)
+# 4. Grouping by test preparation course
+print("\nScores based on test preparation course:")
+prep = df.groupby("test preparation course")[
+    ["math score", "reading score", "writing score"]
+].agg(["mean", "max", "min"])
+print(prep)
